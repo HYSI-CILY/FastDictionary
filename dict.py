@@ -1,8 +1,8 @@
 # Write code here
 import pandas as pd
 import time
-df=pd.read_csv("ecdict.mini.csv")
 time_start = time.time()
+df=pd.read_csv("ecdict.csv")
 df.fillna('Nan',inplace=True)
 dictation={}
 keys = ["phonetic","definition","translation","pos","collins","oxford","tag","bnc","frq","exchange","detail","audio"]
@@ -15,11 +15,13 @@ for values in df.values:
     dictation[values[0]] = content
 time_end = time.time()
 print("Dictionary construction delay: ",time_end-time_start,"s")
-print(dictation)
-
-
+#print(dictation)
 word=str(input())
+time_start = time.time()
 dic_word=dictation.get(word)
+time_end = time.time()
+check_time = time_end - time_start
+print('Word Finding time:',check_time,'s')
 if dic_word == None:
     print('error')
 else:
